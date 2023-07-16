@@ -34,13 +34,26 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	// 게시판 수정
+	@Override
 	public void modify(BoardVO vo) throws Exception{
 		dao.modify(vo);
 	}
 	
 	// 게시판 삭제
+	@Override
 	public void delete(int bno) throws Exception{
 		dao.delete(bno);
+	}
+	
+	// 게시판 총 갯수
+	@Override
+	public int count() throws Exception{
+		return dao.count();
+	}
+	
+	@Override
+	public List<BoardVO> listPage(int displayPost, int postNum) throws Exception{
+		return dao.listPage(displayPost, postNum);
 	}
 
 }

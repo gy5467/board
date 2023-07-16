@@ -6,27 +6,47 @@
 	
 	<!-- 게시판 목록 -->
 	<select id="list" resultType="com.board.domain.BoardVO">
-		select bno, title, content, writer, regDate, viewCnt from board.tb_board
+		select bno, title, content, writer, regDate, viewCnt
+		from board.tb_board
 	</select>
 	
 	<!-- 게시판 작성 -->
 	<insert id="write" parameterType="com.board.domain.BoardVO">
-		insert into board.tb_board(title, content, writer) values(#{title}, #{content}, #{writer})
+		insert into board.tb_board(title, content, writer)
+		values(#{title}, #{content}, #{writer})
 	</insert>
 	
 	<!-- 게시판 조회 -->
 	<select id="view" parameterType="int" resultType="com.board.domain.BoardVO">
-		select bno, title, content, writer, regDate, viewCnt from tb_board where bno = #{bno}
+		select bno, title, content, writer, regDate, viewCnt
+		from tb_board
+		where bno = #{bno}
 	</select>
 	
 	<!-- 게시판 수정 -->
 	<update id="modify" parameterType="com.board.domain.BoardVO">
-		update tb_board set title=#{title}, content=#{content}, writer=#{writer} where bno=#{bno}
+		update tb_board
+		set title=#{title}, content=#{content}, writer=#{writer}
+		where bno=#{bno}
 	</update>
 	
 	<!-- 게시판 삭제 -->
 	<delete id="delete" parameterType="int">
-		delete from tb_board where bno=#{bno}
+		delete from tb_board
+		where bno=#{bno}
 	</delete>
 	
+	<!-- 게시판 총 갯수 -->
+	<select id="count" resultType="int">
+		select count(bno)
+		from tb_board
+	</select>
+	
+	<!-- 게시판 목록 + 페이징 -->
+	<select id="listPage" parameterType="hashMap" resultType="com.board.domain.BoardVO">
+		select bno, title, writer, regDate, viewCnt
+		from tb_board
+		order by bno desc
+		limit #{displayPost}, #{postNum}
+	</select>	
 </mapper>
