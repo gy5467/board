@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.board.domain.BoardVO;
+import com.board.domain.Page;
 import com.board.service.BoardService;
 
 @Controller
@@ -84,21 +85,17 @@ public class BoardController {
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public void getListPage(Model model, @RequestParam("num") int num) throws Exception{
 		
-		// 게시판 총 갯수
-		int count = service.count();
+		Page page = new Page();
 		
-		// 한 페이지에 출력할 게시판 갯수
-		int postNum = 10;
-		
-		// 하단 페이징 번호([게시판 총 갯수 / 한 페이지에 출력할 갯수]의 올림)
-		int pageNum = (int)Math.ceil((double)count/postNum);
-		
-		// 출력할 게시판
-		int displayPost = (num - 1) * postNum;
-		
-		List<BoardVO> list = null;
-		list = service.listPage(displayPost, postNum);
-		model.addAttribute("list", list);
-		model.addAttribute("pageNum", pageNum);
+		page.setNum(num);
+		page.setCount(service.count());  
+
+		List<BoardVO> list = null; 
+		list = service.listPage(page.getDisplayPost(), page.getPostNum());
+
+		model.addAttribute("list", list);   
+		model.addAttribute("page", page); 
+
+		model.addAttribute("select", num);
 	}
 }
