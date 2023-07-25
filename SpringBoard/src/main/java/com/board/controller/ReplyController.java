@@ -48,4 +48,13 @@ public class ReplyController {
 
 		    return "redirect:/board/view?bno=" + vo.getBno();
 		}
+		
+		// 댓글 수정
+		@RequestMapping(value = "/delete", method = RequestMethod.GET)
+		public String getDelete(ReplyVO vo) throws Exception {
+
+		    replyService.delete(vo);
+
+		    return "redirect:/board/view?bno=" + vo.getBno();
+		}
 }
