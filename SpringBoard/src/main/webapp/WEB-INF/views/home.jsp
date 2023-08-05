@@ -2,20 +2,18 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
-<head>
-	<title>Home</title>
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-
-<p>
-	<a href="/board/list">게시판 목록</a>
-	<a href="/board/write">게시판 작성</a>
-</p>
-
-</body>
+	<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+	
+	<head>
+		<title>Home</title>
+		<link rel="stylesheet" type="text/css" href="../resources/css/style.css">
+	</head>
+	
+	<body>
+		<div id="wrap">
+			<h1>메인!</h1>
+		</div>
+	</body>
+	
+	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 </html>
